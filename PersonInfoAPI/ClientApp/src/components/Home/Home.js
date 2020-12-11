@@ -8,8 +8,6 @@ import DbSelectionForm from "../DbSelectionForm/DbSelectionForm";
 import IsAuthenticated from "../IsAuthenticated/IsAuthenticated";
 // import Login from "../Login/Login";
 
-import config from "../../config";
-
 class Home extends Component {
   static displayName = Home.name;
 
@@ -237,7 +235,6 @@ class Home extends Component {
 
     return (
       <Fragment>
-        <h1>{config.title}</h1>
         <div className="container-fluid">
           <div className="row bg-white">
             <div className="col-3">{PersonForm}</div>

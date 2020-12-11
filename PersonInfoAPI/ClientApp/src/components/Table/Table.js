@@ -70,13 +70,18 @@ class Table extends Component {
   }
 
   render() {
-    let contents = this.props.loading ? (
+    let contents = (
       <p>
         <em>Loading...</em>
       </p>
-    ) : (
-      this.renderPeopleTable(this.props.people)
     );
+    if (!this.props.loading) {
+      if (Array.isArray(this.props.people)) {
+        contents = this.renderPeopleTable(this.props.people);
+      } else {
+        contents = <em>Something went wrong!</em>;
+      }
+    }
 
     return (
       <div className="col-12">
