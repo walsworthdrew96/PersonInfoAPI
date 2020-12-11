@@ -33,10 +33,10 @@ namespace PersonInfoAPI
 
             services.AddScoped<IPersonAccess, SqlPersonAccess>();
 
-            services.AddCors(options =>
-            {
-                options.AddDefaultPolicy(builder => builder.SetIsOriginAllowed(origin => true).AllowAnyHeader().AllowAnyMethod().AllowCredentials());
-            });
+            //services.AddCors(options =>
+            //{
+            //    options.AddDefaultPolicy(builder => builder.SetIsOriginAllowed(origin => true).AllowAnyHeader().AllowAnyMethod().AllowCredentials());
+            //});
 
             services.AddControllersWithViews();
             services.AddControllers();
@@ -76,7 +76,7 @@ namespace PersonInfoAPI
             app.UseStaticFiles();
             app.UseSpaStaticFiles();
             app.UseRouting();
-            app.UseCors();
+            //app.UseCors();
             // 2. Enable authentication middleware
             app.UseAuthentication();
 

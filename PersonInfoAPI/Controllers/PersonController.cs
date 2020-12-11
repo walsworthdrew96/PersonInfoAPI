@@ -28,7 +28,7 @@ namespace PersonInfoWebAPIWPF.Controllers
 
         // GET api/persons
         [HttpGet]
-        [Authorize]
+        //[Authorize]
         public ActionResult<IEnumerable<PersonReadDto>> GetAllPersons(string dbSelection)
         {
             var personItems = _repository.GetAllPersons();
@@ -43,7 +43,7 @@ namespace PersonInfoWebAPIWPF.Controllers
 
         // GET api/persons/5
         [HttpGet("{id}")]
-        [Authorize]
+        //[Authorize]
         public ActionResult<PersonReadDto> GetPersonById(int id, string dbSelection)
         {
             var personItem = _repository.GetPersonById(id);
@@ -53,7 +53,7 @@ namespace PersonInfoWebAPIWPF.Controllers
 
         // POST api/persons
         [HttpPost]
-        [Authorize]
+        //[Authorize]
         public ActionResult<PersonReadDto> CreatePerson([FromBody] PersonCreateDto personCreateDto, string dbSelection)
         {
             var personModel = _mappings.ExternalCreateToInternal(-1, personCreateDto);
@@ -64,7 +64,7 @@ namespace PersonInfoWebAPIWPF.Controllers
 
         // PUT api/persons/5
         [HttpPut("{id}")]
-        [Authorize]
+        //[Authorize]
         public ActionResult UpdatePerson(int id, [FromBody] PersonUpdateDto personUpdateDto, string dbSelection)
         {
             var personModelFromRepo = _repository.GetPersonById(id);
@@ -79,7 +79,7 @@ namespace PersonInfoWebAPIWPF.Controllers
 
         // DELETE api/persons/5
         [HttpDelete("{id}")]
-        [Authorize]
+        //[Authorize]
         public ActionResult DeletePerson(int id, string dbSelection)
         {
             var personModelFromRepo = _repository.GetPersonById(id);

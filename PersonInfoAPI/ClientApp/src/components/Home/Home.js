@@ -5,8 +5,6 @@ import Table from "../Table/Table";
 import PersonCreateForm from "../PersonCreateForm/PersonCreateForm";
 import PersonChangeForm from "../PersonChangeForm/PersonChangeForm";
 import DbSelectionForm from "../DbSelectionForm/DbSelectionForm";
-import IsAuthenticated from "../IsAuthenticated/IsAuthenticated";
-// import Login from "../Login/Login";
 
 class Home extends Component {
   static displayName = Home.name;
@@ -22,17 +20,6 @@ class Home extends Component {
       loggedIn: false,
     };
   }
-
-  //AUTH0 IMPLEMENTATION
-  // loginClickHandler = () => {
-  // };
-
-  // logoutClickHandler = async () => {
-  // };
-
-  // // or with promises
-  // exampleApICall = () => {
-  // };
 
   componentDidMount() {
     this.getAllPeople();
