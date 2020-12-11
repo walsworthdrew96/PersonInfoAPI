@@ -28,7 +28,7 @@ namespace PersonInfoWebAPIWPF.Controllers
 
         // GET api/persons
         [HttpGet]
-        //[Authorize]
+        [Authorize]
         public ActionResult<IEnumerable<PersonReadDto>> GetAllPersons(string dbSelection)
         {
             var personItems = _repository.GetAllPersons();

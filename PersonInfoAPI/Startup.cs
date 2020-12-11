@@ -50,8 +50,8 @@ namespace PersonInfoAPI
                 options.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
             }).AddJwtBearer(options =>
             {
-                options.Authority = "https://dev-ia054pom.us.auth0.com/";
-                options.Audience = "https://personinfoapi-authenticate.com";
+                options.Authority = $"https://{Configuration["Auth0:Domain"]}/";
+                options.Audience = Configuration["Auth0:Audience"];
             });
 
             services.AddSpaStaticFiles(configuration =>
@@ -84,9 +84,7 @@ namespace PersonInfoAPI
 
             app.UseEndpoints(endpoints =>
             {
-                endpoints.MapControllerRoute(
-                  name: "default",
-                  pattern: "{controller=Home}/{action=Index}/{id?}");
+                endpoints.MapControllers();
             });
 
             app.UseSpa(spa =>
