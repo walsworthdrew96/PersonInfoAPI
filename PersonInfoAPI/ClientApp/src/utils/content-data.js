@@ -1,27 +1,33 @@
 const contentData = [
   {
-    title: "Configure other identity providers",
-    link: "https://auth0.com/docs/connections",
+    title: "Front End (React.js)",
+    link: "https://reactjs.org/",
     description:
-      "Auth0 supports social providers as Facebook, Twitter, Instagram and 100+, Enterprise providers as Microsoft Office 365, Google Apps, Azure, and more. You can also use any OAuth2 Authorization Server.",
+      "The frontend was created using React functional components and React Hooks. The styling comes from Bootstrap. After logging in, the app requests a token from Auth0 and then uses that token to access the Person Info API.",
   },
   {
-    title: "Enable Multifactor Authentication",
-    link: "https://auth0.com/docs/multifactor-authentication",
+    title: "Web API & SQL Database (Azure Cloud)",
+    link: "https://drewapiwebapp.azurewebsites.net/",
     description:
-      "Add an extra layer of security by enabling Multi-factor Authentication, requiring your users to provide more than one piece of identifying information. Push notifications, authenticator apps, SMS, and DUO Security are supported.",
+      "The Person Info API is a Secure Web API is hosted on Azure and features the ability to perform CRUD operations on a database. The app makes a request to the API, which then updates the database. A Person consists of an Id, and a First and Last Name.",
   },
   {
-    title: "Anomaly Detection",
-    link: "https://auth0.com/docs/anomaly-detection",
+    title: "CI/CD (Azure DevOps)",
+    link: "https://azure.microsoft.com/",
     description:
-      "Auth0 can detect anomalies and stop malicious attempts to access your application. Anomaly detection can alert you and your users of suspicious activity, as well as block further login attempts.",
+      "This app features Continuous Integration and Continuous Deployment to Azure and keeps sensitive information safe by replacing tokens with build pipeline variables.",
   },
   {
-    title: "Learn About Rules",
-    link: "https://auth0.com/docs/rules",
+    title: "Security (Auth0)",
+    link: "https://auth0.com/",
     description:
-      "Rules are JavaScript functions that execute when a user authenticates to your application. They run once the authentication process is complete, and you can use them to customize and extend Auth0's capabilities.",
+      "This app features HTTPS and Universal Login and Token-based API authentication and authorization provided by Auth0. The API and Auth0 Application both have a CORS policy to only allow specific request origins.",
+  },
+  {
+    title: "Unit Testing (xUnit)",
+    link: "https://xunit.net/",
+    description:
+      "This app features 14 unit tests which test the database connection class for correct functionality. These tests are run automatically by the build pipeline.",
   },
 ];
 

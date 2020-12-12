@@ -3,7 +3,7 @@ import { Route, Switch } from "react-router-dom";
 import { Container } from "react-bootstrap";
 
 import { NavBar, Footer, Loading, PrivateRoute } from "./components";
-import { Home, Profile, ExternalApi, PersonAPI } from "./views";
+import { Home, Profile, PersonAPI } from "./views";
 import { useAuth0 } from "@auth0/auth0-react";
 
 import "./app.css";
@@ -21,8 +21,7 @@ const App = () => {
         <Switch>
           <Route path="/" exact component={Home} />
           <PrivateRoute path="/profile" component={Profile} />
-          <Route path="/person-api" exact component={PersonAPI} />
-          <Route path="/external-api" component={ExternalApi} />
+          <PrivateRoute path="/person-api" exact component={PersonAPI} />
         </Switch>
       </Container>
       <Footer />

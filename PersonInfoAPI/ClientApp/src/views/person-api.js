@@ -258,6 +258,8 @@ const PersonAPI = (props) => {
               </div>
             </div>
             <div className="row bg-white">
+              <p>{message}</p>
+              <p style={{ color: "red" }}>{error}</p>
               <Table
                 people={people}
                 loading={loading}

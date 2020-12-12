@@ -1,6 +1,6 @@
 import React from "react";
 import { NavLink as RouterNavLink } from "react-router-dom";
-import { Container, Nav, Navbar } from "react-bootstrap";
+import { Container, Nav, Navbar, NavItem } from "react-bootstrap";
 import { useAuth0 } from "@auth0/auth0-react";
 import LoginButton from "./login-button";
 import LogoutButton from "./logout-button";
@@ -31,14 +31,46 @@ const MainNav = () => (
     >
       Person API
     </Nav.Link>
-    <Nav.Link
-      as={RouterNavLink}
-      to="/external-api"
-      exact
-      activeClassName="router-link-exact-active"
-    >
-      External API
-    </Nav.Link>
+    <NavItem>
+      <a
+        className="text-dark nav-link"
+        href="https://github.com/walsworthdrew96"
+        rel="noopener noreferrer"
+        target="_blank"
+      >
+        My GitHub
+      </a>
+    </NavItem>
+    <NavItem>
+      <a
+        className="text-dark nav-link"
+        href="https://www.linkedin.com/in/drew-walsworth-423873183/"
+        rel="noopener noreferrer"
+        target="_blank"
+      >
+        My LinkedIn
+      </a>
+    </NavItem>
+    <NavItem>
+      <a
+        className="text-dark nav-link"
+        href="https://github.com/walsworthdrew96"
+        rel="noopener noreferrer"
+        target="_blank"
+      >
+        Project Repo
+      </a>
+    </NavItem>
+    {/* <NavItem>
+      <a
+        className="text-dark nav-link"
+        href="https://www.linkedin.com/in/drew-walsworth-423873183/"
+        rel="noopener noreferrer"
+        target="_blank"
+      >
+        About
+      </a>
+    </NavItem> */}
   </Nav>
 );
 
