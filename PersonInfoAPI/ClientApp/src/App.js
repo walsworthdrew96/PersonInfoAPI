@@ -1,20 +1,33 @@
-import React, { Component } from "react";
-import { Route } from "react-router";
-import { Layout } from "./Layout/Layout";
-import Home from "./components/Home/Home";
+import React from "react";
+import { Route, Switch } from "react-router-dom";
+import { Container } from "react-bootstrap";
 
-import "./custom.css";
+import { NavBar, Footer, Loading, PrivateRoute } from "./components";
+import { Home, Profile, ExternalApi, PersonAPI } from "./views";
+import { useAuth0 } from "@auth0/auth0-react";
 
-export default class App extends Component {
-  static displayName = App.name;
+import "./app.css";
 
-  render() {
-    return (
-      <Layout>
-        <Route exact path="/" component={Home} />
-        {/* <Route path='/counter' component={Counter} />
-        <Route path='/fetch-data' component={FetchData} /> */}
-      </Layout>
-    );
+const App = () => {
+  const { isLoading } = useAuth0();
+  if (isLoading) {
+    return <Loading />;
   }
-}
+
+  return (
+    <div id="app" className="d-flex flex-column h-100">
+      <NavBar />
+      <Container className="flex-grow-1 mt-5">
+        <Switch>
+          <Route path="/" exact component={Home} />
+          <PrivateRoute path="/profile" component={Profile} />
+          <Route path="/person-api" exact component={PersonAPI} />
+          <Route path="/external-api" component={ExternalApi} />
+        </Switch>
+      </Container>
+      <Footer />
+    </div>
+  );
+};
+
+export default App;

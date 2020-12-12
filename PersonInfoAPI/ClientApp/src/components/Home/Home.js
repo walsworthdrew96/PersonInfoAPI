@@ -6,7 +6,7 @@ import PersonCreateForm from "../PersonCreateForm/PersonCreateForm";
 import PersonChangeForm from "../PersonChangeForm/PersonChangeForm";
 import DbSelectionForm from "../DbSelectionForm/DbSelectionForm";
 
-class Home extends Component {
+export class Home extends Component {
   static displayName = Home.name;
 
   constructor(props) {
@@ -17,7 +17,6 @@ class Home extends Component {
       selectedPersonRow: {},
       people: [],
       loading: true,
-      loggedIn: false,
     };
   }
 
@@ -175,21 +174,6 @@ class Home extends Component {
   };
 
   render() {
-    // // get auth0 client:
-    // if (this.state.auth0Client === null) {
-    //   this.setState({ auth0Client: getAuth0Client() });
-    // }
-
-    // let loginLogoutButton = !this.state.loggedIn ? (
-    //   <button id="login" onClick={this.loginClickHandler}>
-    //     Login
-    //   </button>
-    // ) : (
-    //   <button id="logout" onClick={this.logoutClickHandler}>
-    //     Logout
-    //   </button>
-    // );
-
     let PersonForm = (
       <PersonCreateForm
         selectedPerson={this.state.selectedPerson}
@@ -232,10 +216,6 @@ class Home extends Component {
                     dbSelection={this.state.dbSelection}
                     onDbSelectionChange={this.onDbSelectionChange}
                   />
-                  <button onClick={(e) => this.getAllPeople(e)}>
-                    Reload Table
-                  </button>
-                  {/* <Login /> */}
                 </div>
               </div>
               <div className="row bg-white">
@@ -252,5 +232,3 @@ class Home extends Component {
     );
   }
 }
-
-export default Home;

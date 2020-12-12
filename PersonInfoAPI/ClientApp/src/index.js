@@ -1,19 +1,16 @@
-import "bootstrap/dist/css/bootstrap.css";
 import React from "react";
 import ReactDOM from "react-dom";
-import { BrowserRouter } from "react-router-dom";
-import App from "./App";
-import registerServiceWorker from "./registerServiceWorker";
+import App from "./app";
+import { BrowserRouter as Router } from "react-router-dom";
+import Auth0ProviderWithHistory from "./auth0-provider-with-history";
 import axios from "axios";
-import { Auth0Provider } from "@auth0/auth0-react";
-// import { Auth0Client } from "@auth0/auth0-spa-js";
 
-const domain = process.env.REACT_APP_AUTH0_DOMAIN;
-const clientId = process.env.REACT_APP_AUTH0_CLIENT_ID;
+
+import "./index.css";
 
 // get the base url from the <base> element
 // const baseUrl = document.getElementsByTagName('base')[0].getAttribute('href');
-const baseUrl = "/";
+// const baseUrl = "/";
 
 // axios.defaults.baseURL = "https://localhost:5001";
 // axios.defaults.baseURL = "https://personinfoappservice.azurewebsites.net/";
@@ -45,19 +42,14 @@ axios.interceptors.response.use(
   }
 );
 
-const rootElement = document.getElementById("root");
+// const rootElement = document.getElementById("root");
+
 
 ReactDOM.render(
-  <Auth0Provider
-    domain={domain}
-    clientId={clientId}
-    redirectUri={window.location.origin}
-  >
-    <BrowserRouter basename={baseUrl}>
+  <Router>
+    <Auth0ProviderWithHistory>
       <App />
-    </BrowserRouter>
-  </Auth0Provider>,
-  rootElement
+    </Auth0ProviderWithHistory>
+  </Router>,
+  document.getElementById("root")
 );
-
-registerServiceWorker();

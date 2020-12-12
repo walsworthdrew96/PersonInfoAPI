@@ -33,10 +33,17 @@ namespace PersonInfoAPI
 
             services.AddScoped<IPersonAccess, SqlPersonAccess>();
 
+            // // Enable CORS for any origin, headers, methods, and credentials.
             //services.AddCors(options =>
             //{
             //    options.AddDefaultPolicy(builder => builder.SetIsOriginAllowed(origin => true).AllowAnyHeader().AllowAnyMethod().AllowCredentials());
             //});
+
+            string[] allowedOrigins = { "https://localhost:5001", "http://localhost:3000", "https://personinfoappservice.azurewebsites.net/", "https://drewapiwebapp.azurewebsites.net" };
+            services.AddCors(options =>
+            {
+                options.AddDefaultPolicy(builder => builder.WithOrigins(allowedOrigins).AllowCredentials());
+            });
 
             services.AddControllersWithViews();
             services.AddControllers();
@@ -54,6 +61,7 @@ namespace PersonInfoAPI
                 options.Audience = Configuration["Auth0:Audience"];
             });
 
+            //react build files location
             services.AddSpaStaticFiles(configuration =>
             {
                 configuration.RootPath = "ClientApp/build";
@@ -89,10 +97,12 @@ namespace PersonInfoAPI
 
             app.UseSpa(spa =>
             {
+                //spa application folder
                 spa.Options.SourcePath = "ClientApp";
 
                 if (env.IsDevelopment())
                 {
+                    // run the react server in development mode
                     spa.UseReactDevelopmentServer(npmScript: "start");
                 }
             });

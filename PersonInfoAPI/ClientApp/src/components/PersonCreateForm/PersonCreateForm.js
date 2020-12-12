@@ -1,7 +1,5 @@
 import React, { Component } from "react";
 
-import { withAuthenticationRequired } from "@auth0/auth0-react";
-
 class PersonCreateForm extends Component {
   render() {
     return (
@@ -51,6 +49,4 @@ class PersonCreateForm extends Component {
   }
 }
 
-export default withAuthenticationRequired(PersonCreateForm, {
-  onRedirecting: () => <div>Redirecting you to the login page...</div>,
-});
+export default PersonCreateForm;

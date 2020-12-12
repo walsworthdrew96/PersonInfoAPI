@@ -1,7 +1,5 @@
 import React, { Component } from "react";
 
-import { withAuthenticationRequired } from "@auth0/auth0-react";
-
 class Table extends Component {
   static displayName = Table.name;
 
@@ -70,31 +68,22 @@ class Table extends Component {
   }
 
   render() {
-    let contents = (
+    let contents = this.props.loading ? (
       <p>
         <em>Loading...</em>
       </p>
+    ) : (
+      this.renderPeopleTable(this.props.people)
     );
-    if (!this.props.loading) {
-      if (Array.isArray(this.props.people)) {
-        contents = this.renderPeopleTable(this.props.people);
-      } else {
-        contents = <em>Something went wrong!</em>;
-      }
-    }
 
     return (
       <div className="col-12">
         <h1>People</h1>
-        <p>
-          Left click on a table row to select a Person for editing or deletion.
-        </p>
+        <p>Left click on a table row to select a Person for editing or deletion.</p>
         {contents}
       </div>
     );
   }
 }
 
-export default withAuthenticationRequired(Table, {
-  onRedirecting: () => <div>Redirecting you to the login page...</div>,
-});
+export default Table;

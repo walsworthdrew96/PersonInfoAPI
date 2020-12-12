@@ -1,7 +1,5 @@
 import React, { Component, Fragment } from "react";
 
-import { withAuthenticationRequired } from "@auth0/auth0-react";
-
 class PersonChangeForm extends Component {
   render() {
     return (
@@ -65,6 +63,4 @@ class PersonChangeForm extends Component {
   }
 }
 
-export default withAuthenticationRequired(PersonChangeForm, {
-  onRedirecting: () => <div>Redirecting you to the login page...</div>,
-});
+export default PersonChangeForm;

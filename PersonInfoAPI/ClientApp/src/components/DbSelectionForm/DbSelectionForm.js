@@ -1,7 +1,5 @@
 import React, { Component } from "react";
 
-import { withAuthenticationRequired } from "@auth0/auth0-react";
-
 // import
 
 class DbSelectionForm extends Component {
@@ -43,6 +41,4 @@ class DbSelectionForm extends Component {
   }
 }
 
-export default withAuthenticationRequired(DbSelectionForm, {
-  onRedirecting: () => <div>Redirecting you to the login page...</div>,
-});
+export default DbSelectionForm;
