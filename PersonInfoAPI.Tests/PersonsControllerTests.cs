@@ -9,7 +9,7 @@ using System.Collections.Generic;
 using System.Text;
 using Xunit;
 
-namespace PersonInfoAPI.Moq
+namespace PersonInfoAPI.UnitTests
 {
     public class PersonsControllerTests : IDisposable
     {
@@ -154,7 +154,7 @@ namespace PersonInfoAPI.Moq
             //Act
             var result = controller.CreatePerson(new PersonCreateDto { }, "");
             //Assert
-            Assert.IsType<CreatedAtRouteResult>(result.Result);
+            Assert.IsType<CreatedResult>(result.Result);
         }
 
         [Fact]

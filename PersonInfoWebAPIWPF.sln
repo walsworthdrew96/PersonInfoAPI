@@ -5,7 +5,7 @@ VisualStudioVersion = 16.0.30621.155
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PersonInfoAPI", "PersonInfoAPI\PersonInfoAPI.csproj", "{D71A4D67-3CDD-46A2-A549-84EC2AD446BF}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PersonInfoAPI.Tests", "PersonInfoAPI.Tests\PersonInfoAPI.Tests.csproj", "{E08023A0-7D7C-4DE0-B33E-60F3916146C5}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PersonInfoAPI.UnitTests", "PersonInfoAPI.Tests\PersonInfoAPI.UnitTests.csproj", "{E08023A0-7D7C-4DE0-B33E-60F3916146C5}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
