@@ -302,10 +302,10 @@ const PersonAPI = (props) => {
     <>
       <div className="container-fluid">
         <div className="row bg-white">
-          <div className="col-3">{PersonForm}</div>
-          <main className="col-9">
+          <div className="col-md-3 col-sm-12">{PersonForm}</div>
+          <main className="col-md-9 col-sm-12">
             <div className="row bg-white">
-              <div className="col-12">
+              <div className="col-md-12">
                 <DbSelectionForm
                   dbSelection={dbSelection}
                   onDbSelectionChange={onDbSelectionChange}
