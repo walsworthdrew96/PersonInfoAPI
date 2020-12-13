@@ -21,7 +21,7 @@ const App = () => {
         <Switch>
           <Route path="/" exact component={Home} />
           <PrivateRoute path="/profile" component={Profile} />
-          <Route path="/person-api" exact component={PersonAPI} />
+          <PrivateRoute path="/person-api" exact component={PersonAPI} />
         </Switch>
       </Container>
       <Footer />
