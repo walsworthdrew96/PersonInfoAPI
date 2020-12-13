@@ -39,16 +39,17 @@ namespace PersonInfoAPI
             //    options.AddDefaultPolicy(builder => builder.SetIsOriginAllowed(origin => true).AllowAnyHeader().AllowAnyMethod().AllowCredentials());
             //});
 
-            string[] allowedOrigins = { "https://localhost:5001", "http://localhost:3000", "https://personinfoappservice.azurewebsites.net/", "https://drewapiwebapp.azurewebsites.net" };
+            string[] allowedOrigins = { "https://localhost:5001", "http://localhost:3000", "https://personinfoappservice.azurewebsites.net/", "https://drewapiwebapp.azurewebsites.net", "https://dev-ia054pom.us.auth0.com" };
+            string[] allowedMethods = { "GET", "POST", "PUT", "DELETE" };
             services.AddCors(options =>
             {
-                options.AddDefaultPolicy(builder => builder.WithOrigins(allowedOrigins).AllowCredentials());
+                options.AddDefaultPolicy(builder => builder.WithOrigins(allowedOrigins).AllowAnyHeader().WithMethods(allowedMethods).AllowCredentials());
             });
 
-            services.AddControllersWithViews();
+            //services.AddControllersWithViews();
             services.AddControllers();
 
-            services.AddMvc();
+            //services.AddMvc();
 
             // 1. Add Authentication Services
             services.AddAuthentication(options =>
@@ -84,7 +85,7 @@ namespace PersonInfoAPI
             app.UseStaticFiles();
             app.UseSpaStaticFiles();
             app.UseRouting();
-            //app.UseCors();
+            app.UseCors();
             // 2. Enable authentication middleware
             app.UseAuthentication();
 
@@ -94,6 +95,13 @@ namespace PersonInfoAPI
             {
                 endpoints.MapControllers();
             });
+
+            //app.UseMvc(routes =>
+            //{
+            //    routes.MapRoute(
+            //      name: "default",
+            //      template: "{controller=Home}/{action=Index}/{id?}");
+            //});
 
             app.UseSpa(spa =>
             {

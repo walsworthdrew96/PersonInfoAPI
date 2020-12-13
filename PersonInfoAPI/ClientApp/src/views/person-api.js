@@ -96,30 +96,52 @@ const PersonAPI = (props) => {
     setSelectedPerson({ id: "", firstName: "", lastName: "" });
   };
 
+  useEffect(() => {
+    (async () => {
+      try {
+        const token = await getAccessTokenSilently();
+        const response = await fetch(
+          `${axios.defaults.baseURL}/api/person?dbSelection=${dbSelection}`,
+          {
+            headers: {
+              Authorization: `Bearer ${token}`,
+            },
+          }
+        );
+        console.log("response from async await:", await response.json());
+      } catch (e) {
+        console.error(e);
+      }
+    })();
+  }, [getAccessTokenSilently, dbSelection]);
+
   const getAllPeople = useCallback(
     (e) => {
       if (e !== undefined) {
         e.preventDefault();
       }
-      // GET all Person objects
-      const token = getAccessTokenSilently();
-      // Get all people with authorization
-      axios
-        .get(`/api/person?dbSelection=${dbSelection}`, {
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
-        })
-        .then((response) => {
-          console.log("GET response.data:", response.data);
-          setPeople(response.data);
-          setLoading(false);
-        })
-        .catch((error) => {
-          console.log("GET error:", error);
-          setMessage(error.message);
-          setError(true);
-        });
+      (async () => {
+        try {
+          const token = await getAccessTokenSilently();
+          axios
+            .get(`/api/person?dbSelection=${dbSelection}`, {
+              headers: {
+                Authorization: `Bearer ${token}`,
+              },
+            })
+            .then((response) => {
+              setPeople(response.data);
+              setLoading(false);
+            })
+            .catch((error) => {
+              setMessage(error.message);
+              setError(true);
+            });
+          // console.log("response from async await:", await response.json());
+        } catch (e) {
+          console.error(e);
+        }
+      })();
     },
     [getAccessTokenSilently, dbSelection]
   );
@@ -130,99 +152,132 @@ const PersonAPI = (props) => {
     setLoading(false);
   }, [getAllPeople]);
 
-  const createPersonFormSubmit = (e) => {
-    if (e !== undefined) {
-      e.preventDefault();
-    }
-    setLoading(true);
-    // POST a Person with authorization
-    const token = getAccessTokenSilently();
-    axios
-      .post(
-        `/api/person?dbSelection=${dbSelection}`,
-        {
-          firstName: selectedPerson.firstName,
-          lastName: selectedPerson.lastName,
-        },
-        {
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
+  const createPersonFormSubmit = useCallback(
+    (e) => {
+      if (e !== undefined) {
+        e.preventDefault();
+      }
+      setLoading(true);
+      // POST a Person with authorization
+      (async () => {
+        try {
+          const token = await getAccessTokenSilently();
+          axios
+            .post(
+              `/api/person?dbSelection=${dbSelection}`,
+              {
+                firstName: selectedPerson.firstName,
+                lastName: selectedPerson.lastName,
+              },
+              {
+                headers: {
+                  Authorization: `Bearer ${token}`,
+                },
+              }
+            )
+            .then((response) => {
+              // this.operationCancelHandler(null);
+              console.log("POST response.data:", response.data);
+              getAllPeople();
+              return response.data;
+            })
+            .catch((error) => {
+              // this.operationCancelHandler(null);
+              console.log("POST error:", error);
+              setMessage(error.message);
+              setError(true);
+            });
+          // console.log("response from async await:", await response.json());
+        } catch (e) {
+          console.error(e);
         }
-      )
-      .then((response) => {
-        // this.operationCancelHandler(null);
-        console.log("POST response.data:", response.data);
-        getAllPeople();
-        return response.data;
-      })
-      .catch((error) => {
-        // this.operationCancelHandler(null);
-        console.log("POST error:", error);
-        setMessage(error.message);
-        setError(true);
-      });
-  };
+      })();
+    },
+    [getAccessTokenSilently, dbSelection, getAllPeople, selectedPerson]
+  );
 
-  const editPersonOnClick = (e) => {
-    if (e !== undefined) {
-      e.preventDefault();
-    }
-    setLoading(true);
-    // PUT a Person
-    const token = getAccessTokenSilently();
-    axios
-      .put(
-        `/api/person/${selectedPerson.id}?dbSelection=${dbSelection}`,
-        {
-          id: selectedPerson.id,
-          firstName: selectedPerson.firstName,
-          lastName: selectedPerson.lastName,
-        },
-        {
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
+  const editPersonOnClick = useCallback(
+    (e) => {
+      if (e !== undefined) {
+        e.preventDefault();
+      }
+      setLoading(true);
+      // PUT a Person
+      (async () => {
+        try {
+          const token = await getAccessTokenSilently();
+          axios
+            .put(
+              `/api/person/${selectedPerson.id}?dbSelection=${dbSelection}`,
+              {
+                id: selectedPerson.id,
+                firstName: selectedPerson.firstName,
+                lastName: selectedPerson.lastName,
+              },
+              {
+                headers: {
+                  Authorization: `Bearer ${token}`,
+                },
+              }
+            )
+            .then((response) => {
+              // this.operationCancelHandler(null);
+              console.log("PUT response.data:", response.data);
+              getAllPeople();
+              return response.data;
+            })
+            .catch((error) => {
+              // this.operationCancelHandler(null);
+              console.log("PUT error:", error);
+              setMessage(error.message);
+              setError(true);
+            });
+          // console.log("response from async await:", await response.json());
+        } catch (e) {
+          console.error(e);
         }
-      )
-      .then((response) => {
-        // this.operationCancelHandler(null);
-        console.log("PUT response.data:", response.data);
-        getAllPeople();
-        return response.data;
-      })
-      .catch((error) => {
-        // this.operationCancelHandler(null);
-        console.log("PUT error:", error);
-        setMessage(error.message);
-        setError(true);
-      });
-  };
+      })();
+    },
+    [getAccessTokenSilently, dbSelection, getAllPeople, selectedPerson]
+  );
 
-  const deletePersonOnClick = (e) => {
-    if (e !== undefined) {
-      e.preventDefault();
-    }
-    // DELETE a Person
-    const token = getAccessTokenSilently();
-    axios
-      .delete(`/api/person/${selectedPerson.id}?dbSelection=${dbSelection}`, {
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
-      })
-      .then((response) => {
-        // this.operationCancelHandler(null);
-        console.log("DELETE response.data:", response.data);
-        getAllPeople();
-        return response.data;
-      })
-      .catch((error) => {
-        // this.operationCancelHandler(null);
-        console.log("DELETE error:", error);
-        setError(true);
-      });
-  };
+  const deletePersonOnClick = useCallback(
+    (e) => {
+      if (e !== undefined) {
+        e.preventDefault();
+      }
+      // DELETE a Person
+      (async () => {
+        try {
+          const token = await getAccessTokenSilently();
+          axios
+            .delete(
+              `/api/person/${selectedPerson.id}?dbSelection=${dbSelection}`,
+              {
+                headers: {
+                  Authorization: `Bearer ${token}`,
+                },
+              }
+            )
+            .then((response) => {
+              // this.operationCancelHandler(null);
+              console.log("DELETE response.data:", response.data);
+              getAllPeople();
+              return response.data;
+            })
+            .catch((error) => {
+              // this.operationCancelHandler(null);
+              console.log("DELETE error:", error);
+              setError(true);
+            });
+          // console.log("response from async await:", await response.json());
+        } catch (e) {
+          console.error(e);
+        }
+      })();
+    },
+    [getAccessTokenSilently, dbSelection, getAllPeople, selectedPerson]
+  );
   let PersonForm = (
     <PersonCreateForm
       selectedPerson={selectedPerson}

@@ -121,6 +121,16 @@ namespace PersonInfoAPI.Data
                 cmd.Parameters.Add(new SqlParameter("@LastName", person.LastName));
                 _connection.Open();
                 cmd.ExecuteNonQuery();
+                SqlCommand getLastIdCreated = new SqlCommand("SELECT MAX(Id) as Id FROM PERSON;", _connection);
+                int lastIdCreated = 0;
+                using (var reader = getLastIdCreated.ExecuteReader())
+                {
+                    while (reader.Read())
+                    {
+                        lastIdCreated = (int)reader["Id"];
+                    }
+                }
+                person.Id = lastIdCreated;
                 _connection.Close();
                 return;
             }

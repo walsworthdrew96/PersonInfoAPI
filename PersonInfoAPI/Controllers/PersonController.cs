@@ -59,7 +59,8 @@ namespace PersonInfoWebAPIWPF.Controllers
             var personModel = _mappings.ExternalCreateToInternal(-1, personCreateDto);
             _repository.CreatePerson(personModel);
             var personReadDto = _mappings.InternalToExternalRead(personModel);
-            return CreatedAtRoute(nameof(GetPersonById), new { Id = personReadDto.Id }, personReadDto);
+            var actionResponse = Created("api/person", personReadDto);
+            return actionResponse;
         }
 
         // PUT api/persons/5
