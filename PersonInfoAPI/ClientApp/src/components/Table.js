@@ -1,9 +1,7 @@
-import React, { Component } from "react";
+import React from "react";
 
-class Table extends Component {
-  static displayName = Table.name;
-
-  renderPeopleTable(people) {
+const Table = ({ selectedPerson, people, loading, selectPersonOnClick }) => {
+  const renderPeopleTable = (people) => {
     return (
       <table
         className="col-12 table table-striped"
@@ -20,20 +18,17 @@ class Table extends Component {
           {people.map((person, index) => (
             <tr
               style={
-                this.props.selectedPerson !== undefined &&
-                this.props.selectedPerson.id === person.id
+                selectedPerson !== undefined && selectedPerson.id === person.id
                   ? { backgroundColor: "blue" }
                   : {}
               }
               key={person.id}
-              onClick={(e) =>
-                this.props.onPersonSelectionClick(e, people[index])
-              }
+              onClick={(e) => selectPersonOnClick(e, people[index])}
             >
               <td
                 style={
-                  this.props.selectedPerson !== undefined &&
-                  this.props.selectedPerson.id === person.id
+                  selectedPerson !== undefined &&
+                  selectedPerson.id === person.id
                     ? { backgroundColor: "blue" }
                     : {}
                 }
@@ -42,8 +37,8 @@ class Table extends Component {
               </td>
               <td
                 style={
-                  this.props.selectedPerson !== undefined &&
-                  this.props.selectedPerson.id === person.id
+                  selectedPerson !== undefined &&
+                  selectedPerson.id === person.id
                     ? { backgroundColor: "blue" }
                     : {}
                 }
@@ -52,8 +47,8 @@ class Table extends Component {
               </td>
               <td
                 style={
-                  this.props.selectedPerson !== undefined &&
-                  this.props.selectedPerson.id === person.id
+                  selectedPerson !== undefined &&
+                  selectedPerson.id === person.id
                     ? { backgroundColor: "blue" }
                     : {}
                 }
@@ -65,25 +60,25 @@ class Table extends Component {
         </tbody>
       </table>
     );
-  }
+  };
 
-  render() {
-    let contents = this.props.loading ? (
+  let contents = loading ? (
+    <p>
+      <em>Loading...</em>
+    </p>
+  ) : (
+    renderPeopleTable(people)
+  );
+
+  return (
+    <div className="col-12">
+      <h1>People</h1>
       <p>
-        <em>Loading...</em>
+        Left click on a table row to select a Person for editing or deletion.
       </p>
-    ) : (
-      this.renderPeopleTable(this.props.people)
-    );
-
-    return (
-      <div className="col-12">
-        <h1>People</h1>
-        <p>Left click on a table row to select a Person for editing or deletion.</p>
-        {contents}
-      </div>
-    );
-  }
-}
+      {contents}
+    </div>
+  );
+};
 
 export default Table;

@@ -1,7 +1,8 @@
 import React from "react";
 import { Container, Row, Col } from "react-bootstrap";
-import { Highlight } from "../components";
 import { useAuth0 } from "@auth0/auth0-react";
+
+import Highlight from "../components/Highlight";
 
 export const Profile = () => {
   const { user } = useAuth0();

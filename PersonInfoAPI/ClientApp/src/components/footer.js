@@ -4,9 +4,13 @@ const Footer = () => (
   <footer className="bg-light p-3 text-center">
     <div className="logo" />
     <p>
-     This project was created from a sample project provided by{" "}
-      <a target="_blank" rel="noopener noreferrer" href="https://auth0.com">
-        Auth0
+      This project's repository can be found on{" "}
+      <a
+        target="_blank"
+        rel="noopener noreferrer"
+        href="https://github.com/walsworthdrew96/PersonInfoAPI"
+      >
+        GitHub
       </a>
     </p>
   </footer>

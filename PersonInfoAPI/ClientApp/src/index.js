@@ -2,20 +2,12 @@ import React from "react";
 import ReactDOM from "react-dom";
 import App from "./App";
 import { BrowserRouter as Router } from "react-router-dom";
-import Auth0ProviderWithHistory from "./auth0-provider-with-history";
 import axios from "axios";
 
-
+import Auth0ProviderWithHistory from "./Auth0ProviderWithHistory";
 import "./index.css";
 
-// get the base url from the <base> element
-// const baseUrl = document.getElementsByTagName('base')[0].getAttribute('href');
-// const baseUrl = "/";
-
-// axios.defaults.baseURL = "https://localhost:5001";
-// axios.defaults.baseURL = "https://personinfoappservice.azurewebsites.net/";
 axios.defaults.baseURL = "https://drewapiwebapp.azurewebsites.net/";
-// axios.defaults.headers.common["Authorization"] = "AUTH TOKEN";
 axios.defaults.headers.post["Content-Type"] = "application/json";
 
 axios.interceptors.request.use(
@@ -41,9 +33,6 @@ axios.interceptors.response.use(
     return Promise.reject(error);
   }
 );
-
-// const rootElement = document.getElementById("root");
-
 
 ReactDOM.render(
   <Router>
